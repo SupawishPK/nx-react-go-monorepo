@@ -11,6 +11,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@nx-go/nx-go": "^3.0.0",
     "@nx/devkit": "18.3.4",
     "@nx/eslint": "18.3.4",
     "@nx/eslint-plugin": "18.3.4",
