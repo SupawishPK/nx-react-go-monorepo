@@ -6,21 +6,17 @@ import (
 	"net/http"
 )
 
-type addressBook struct {
-	Firstname string
-	Lastname  string
-	Code      int
-	Phone     string
+type todo struct {
+	Name      string `json:"name"`
+	Completed bool   `json:"completed"`
 }
 
-func getAddressBookAll(w http.ResponseWriter, r *http.Request) {
-	addBook := addressBook{
-		Firstname: "Chaiyarin",
-		Lastname:  "Niamsuwan",
-		Code:      1993,
-		Phone:     "0870940955",
+func getTodos(w http.ResponseWriter, r *http.Request) {
+	addTodo := todo{
+		Name:      "Create a mono repo",
+		Completed: false,
 	}
-	json.NewEncoder(w).Encode(addBook) // (1)
+	json.NewEncoder(w).Encode(addTodo)
 }
 
 func Hello(name string) string {
@@ -28,13 +24,13 @@ func Hello(name string) string {
 	return result
 }
 
-func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Welcome to the HomePage!")
+func health(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "API is up and running")
 }
 
 func handleRequest() {
-	http.HandleFunc("/", homePage)
-	http.HandleFunc("/getAddress", getAddressBookAll) // เพิ่มบรรทัดนี้
+	http.HandleFunc("/", health)
+	http.HandleFunc("/todos", getTodos)
 	http.ListenAndServe(":8080", nil)
 }
 
